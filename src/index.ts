@@ -59,16 +59,16 @@ ${bgGreen().black().bold(" USAGE ")}
 
 $ ${green(`vsc`)} ${blue(`<commands>`)} ${yellow(`[options]`)}
 
-${bgBlue().white().bold(" Commands ")}	
+${bgBlue().white().bold(" COMMANDS ")}	
 
 ${blue(`commands`)} - List all available commands as Markdown output.
 ${blue(`settings`)} - List all available settings as Markdown output.
 
-${bgYellow().black().bold(" Options ")}	
+${bgYellow().black().bold(" OPTIONS ")}	
 
 ${yellow(`--heading, -h`)} -  Specify a heading level for the output. ${gray(`DEFAULT: 2`)}
 
-${bgMagenta().white().bold(" Examples ")}	
+${bgMagenta().white().bold(" EXAMPLES ")}	
 
 $ ${green(`vsc`)} ${blue(`commands`)}
 
