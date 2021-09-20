@@ -1,3 +1,4 @@
+import { writeFileSync } from "fs";
 
 export interface Command {
   command: string;
@@ -15,21 +16,12 @@ export class Commands {
     const cwd = process.cwd();
     const pkg = require(`${cwd}/package.json`);
     
-    if (!pkg || !pkg.contributes) {
-      console.error('package.json is not found or it does not contain "contributes" section');
+    if (!this.validatePkg(pkg)) {
       return;
-    } 
+    }
 
     const commands: Command[] = pkg.contributes.commands;
-    const commandsNames = commands.sort((a, b) => {
-      if (a.title.toLowerCase() < b.title.toLowerCase()) {
-        return -1;
-      }
-      if (a.title.toLowerCase() > b.title.toLowerCase()) {
-        return 1;
-      }
-      return 0;
-    });    
+    const commandsNames = commands.sort(this.sorting);    
 
     const headingStr = '#'.repeat(heading);
     
@@ -39,5 +31,39 @@ export class Commands {
 - ID: \`${command.command}\`
 `);
     }
+  }
+
+  public static order() {
+    const cwd = process.cwd();
+    const pkg = require(`${cwd}/package.json`);
+    
+    if (!this.validatePkg(pkg)) {
+      return;
+    }
+
+    const commands: Command[] = pkg.contributes.commands;
+    const commandsNames = commands.sort(this.sorting);
+    
+    pkg.contributes.commands = commandsNames;
+    console.log(commandsNames)
+    writeFileSync(`${cwd}/package.json`, JSON.stringify(pkg, null, 2));
+  }
+
+  private static validatePkg(pkg: any) {
+    if (!pkg || !pkg.contributes) {
+      console.error('package.json is not found or it does not contain "contributes" section');
+      return false;
+    }
+    return true;
+  }
+
+  private static sorting(a: Command, b: Command) {
+    if (a.title.toLowerCase() < b.title.toLowerCase()) {
+      return -1;
+    }
+    if (a.title.toLowerCase() > b.title.toLowerCase()) {
+      return 1;
+    }
+    return 0;
   }
 }

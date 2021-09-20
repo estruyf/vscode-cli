@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.3] 2021-09-20
+
+- Sorting action added for commands and settings
+
 ## [0.0.2] 2021-09-06
 
 - Updated help titles

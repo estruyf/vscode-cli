@@ -13,11 +13,11 @@
   "license": "MIT",
   "homepage": "https://github.com/estruyf/vscode-cli",
   "bugs": {
-    "url" : "https://github.com/estruyf/vscode-cli/issues"
+    "url": "https://github.com/estruyf/vscode-cli/issues"
   },
   "funding": {
-    "type" : "individual",
-    "url" : "https://github.com/sponsors/estruyf"
+    "type": "individual",
+    "url": "https://github.com/sponsors/estruyf"
   },
   "repository": {
     "type": "git",

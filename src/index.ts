@@ -1,8 +1,8 @@
 import * as inquirer from 'inquirer';
 import * as arg from 'arg';
-import { Settings } from './settings';
 import { bgBlue, bgGreen, bgMagenta, bgYellow, blue, gray, green, red, yellow } from 'kleur';
 import { Commands } from './commands';
+import { Settings } from './settings';
 
 function parseArguments(options: any) {
 	try {
@@ -13,7 +13,8 @@ function parseArguments(options: any) {
 		
 		return {
 			task: args._[0] ? args._[0].startsWith('--help') ? 'help' : args._[0] : null,
-			heading: typeof args['--heading'] === 'number' ? args['--heading'] : 2 // Default: 2
+			action: args._[1] ? args._[1].startsWith('--help') ? 'help' : args._[1] : null,
+			heading: typeof args['--heading'] === 'number' ? args['--heading'] : 2, // Default: 2
 		};
 	} catch (e: any) {
 		if (e.code === 'ARG_MISSING_REQUIRED_LONGARG' && e.message.includes('--heading')) {
@@ -31,8 +32,17 @@ async function promptForMissingArgs(options: any) {
 		questions.push({
 			type: 'list',
 			name: 'task',
-			message: 'Which command do you want to execute?',
+			message: 'For which task type do you want to execute?',
 			choices: ["settings", "commands", "help"]
+		});
+	}
+
+	if (!options.action) {
+		questions.push({
+			type: 'list',
+			name: 'action',
+			message: 'Which action do you want to perform?',
+			choices: ["export", "sort"]
 		});
 	}
 
@@ -61,8 +71,11 @@ $ ${green(`vsc`)} ${blue(`<commands>`)} ${yellow(`[options]`)}
 
 ${bgBlue().white().bold(" COMMANDS ")}	
 
-${blue(`commands`)} - List all available commands as Markdown output.
-${blue(`settings`)} - List all available settings as Markdown output.
+${blue(`commands export`)} - List all available commands as Markdown output.
+${blue(`settings export`)} - List all available settings as Markdown output.
+
+${blue(`commands sort`)} - Sort all commands in the package.json file.
+${blue(`settings sort`)} - Sort all settings in the package.json file.
 
 ${bgYellow().black().bold(" OPTIONS ")}	
 
@@ -70,13 +83,13 @@ ${yellow(`--heading, -h`)} -  Specify a heading level for the output. ${gray(`DE
 
 ${bgMagenta().white().bold(" EXAMPLES ")}	
 
-$ ${green(`vsc`)} ${blue(`commands`)}
+$ ${green(`vsc`)} ${blue(`commands export`)}
 
 ## Command category: title
 
 - ID: \`command id\`
 
-$ ${green(`vsc`)} ${blue(`settings`)} ${yellow(`--heading 2`)}
+$ ${green(`vsc`)} ${blue(`settings export`)} ${yellow(`--heading 2`)}
 
 ## Setting
 
@@ -86,9 +99,18 @@ Markdown description || description
 - Default: \`default\`
 `);
     } else if (options.task === "settings") {
-      Settings.export(options.heading);
+      if (options.action === "export") {
+				Settings.export(options.heading);
+			} else if (options.action === "sort") {
+				Settings.order();
+			}
     } else if (options.task === "commands") {
-      Commands.export(options.heading);
+			console.log(options)
+      if (options.action === "export") {
+				Commands.export(options.heading);
+			} else if (options.action === "sort") {
+				Commands.order();
+			}
 		}
 
     process.exit(0);
