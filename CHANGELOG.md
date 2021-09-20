@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.4] 2021-09-20
+
+- Fix the commands export
+
 ## [0.0.3] 2021-09-20
 
 - Sorting action added for commands and settings

@@ -26,9 +26,9 @@ export class Commands {
     const headingStr = '#'.repeat(heading);
     
     for (const command of commandsNames) {
-      console.log(`${headingStr ? `${headingStr} `: ''}${command.category ? `${command.title}: ` : ''}${command.title}
+      console.log(`${headingStr ? `${headingStr} `: ''}${command.category ? `${command.category}: ` : ''}${command.title}
 
-- ID: \`${command.command}\`
+ID: \`${command.command}\`
 `);
     }
   }
