@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.5] 2021-09-22
+
+- Removed logging in `commands sort`
+
 ## [0.0.4] 2021-09-20
 
 - Fix the commands export

@@ -45,7 +45,6 @@ ID: \`${command.command}\`
     const commandsNames = commands.sort(this.sorting);
     
     pkg.contributes.commands = commandsNames;
-    console.log(commandsNames)
     writeFileSync(`${cwd}/package.json`, JSON.stringify(pkg, null, 2));
   }
 

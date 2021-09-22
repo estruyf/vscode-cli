@@ -105,7 +105,6 @@ Markdown description || description
 				Settings.order();
 			}
     } else if (options.task === "commands") {
-			console.log(options)
       if (options.action === "export") {
 				Commands.export(options.heading);
 			} else if (options.action === "sort") {
