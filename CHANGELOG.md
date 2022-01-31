@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.7] 2022-01-31
+
+- Fix missing parameters
+
 ## [0.0.6] 2022-01-31
 
 - Added `vsc commands add` command

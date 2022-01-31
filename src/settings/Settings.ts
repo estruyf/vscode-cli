@@ -48,7 +48,7 @@ ${setting.markdownDescription || setting.description || ''}
     writeFileSync(Packager.location(), JSON.stringify(clonePkg, null, 2));
   }
 
-  public static add(name: string, type?: string | null, description?: string | null) {
+  public static add(name: string, type?: string | string[] | null, description?: string | null) {
     const pkg = Packager.fetch();
 
     if (!Packager.validate(pkg)) {

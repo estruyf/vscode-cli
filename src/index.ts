@@ -26,7 +26,7 @@ function parseArguments(options: any) {
 			name: typeof args['--name'] === 'string' ? args['--name'] : null,
 			title: typeof args['--title'] === 'string' ? args['--title'] : null,
 			category: typeof args['--category'] === 'string' ? args['--category'] : null,
-			type: typeof args['--type'] === 'string' ? args['--type'] : null,
+			type: typeof args['--type'] === 'string' ? args['--type'] : "",
 			description: typeof args['--description'] === 'string' ? args['--description'] : null,
 		};
 	} catch (e: any) {
@@ -113,21 +113,11 @@ async function promptForMissingParams(options: any) {
 			});
 		}
 
-		if (options.task === "commands" && !options.category) {
-			questions.push({
-				type: 'input',
-				name: 'category',
-				message: `Do you want to specify a category for your command?`,
-				default: null
-			});
-		}
-
 		if (options.task === "settings" && !options.type) {
 			questions.push({
 				type: 'checkbox',
 				name: 'type',
 				message: `What is the type of the new setting?`,
-				default: 'string',
 				choices: ["string", "number", "boolean", "array", "object"],
 			});
 		}
@@ -147,7 +137,11 @@ async function promptForMissingParams(options: any) {
 
 		return {
 			...options,
-			name: options.name || answers.name
+			name: options.name || answers.name,
+			title: options.title || answers.title,
+			category: options.category || answers.category,
+			type: options.type || answers.type,
+			description: options.description || answers.description,
 		};
 	} catch (e: any) {
 		throw e.message;
