@@ -66,6 +66,7 @@ Markdown description || description
 
 - Type: `type`
 - Default: `default`
+```
 
 ```bash
 $ vsc commands add --name <id of the command> --title <title of the command> --category <category of the command>
