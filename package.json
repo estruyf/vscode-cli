@@ -1,6 +1,6 @@
 {
   "name": "@estruyf/vscode-cli",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "VS Code CLI to help you with extension development and documentation",
   "bin": {
     "vsc": "bin/vsc"
