@@ -1,12 +1,12 @@
 import { writeFileSync } from "fs";
+import { Packager } from "../helpers/Packager";
 
 export class Settings {
   
   public static export(heading: number = 2) {
-    const cwd = process.cwd();
-    const pkg = require(`${cwd}/package.json`);
-    
-    if (!Settings.validatePkg(pkg)) {
+    const pkg = Packager.fetch();
+
+    if (!Packager.validate(pkg)) {
       return;
     }
 
@@ -28,10 +28,9 @@ ${setting.markdownDescription || setting.description || ''}
   }
 
   public static order() {
-    const cwd = process.cwd();
-    const pkg = require(`${cwd}/package.json`);
-    
-    if (!Settings.validatePkg(pkg)) {
+    const pkg = Packager.fetch();
+
+    if (!Packager.validate(pkg)) {
       return;
     }
 
@@ -46,15 +45,29 @@ ${setting.markdownDescription || setting.description || ''}
       clonePkg.contributes.configuration.properties[name] = settings[name];
     }
 
-    writeFileSync(`${cwd}/package.json`, JSON.stringify(clonePkg, null, 2));
+    writeFileSync(Packager.location(), JSON.stringify(clonePkg, null, 2));
   }
 
-  private static validatePkg(pkg: any) {
-    if (!pkg || !pkg.contributes) {
-      console.error('package.json is not found or it does not contain "contributes" section');
-      return false;
+  public static add(name: string, type?: string | null, description?: string | null) {
+    const pkg = Packager.fetch();
+
+    if (!Packager.validate(pkg)) {
+      return;
     }
-    return true;
+
+    const settings = pkg.contributes.configuration?.properties;
+    if (settings[name]) {
+      throw new Error(`Setting "${name}" already exists`);
+    }
+
+    const newSetting = {
+      type: type || 'string',
+      markdownDescription: description || ""
+    };
+
+    settings[name] = newSetting;
+
+    writeFileSync(Packager.location(), JSON.stringify(pkg, null, 2));
   }
 
   private static sorting(settings: any) {

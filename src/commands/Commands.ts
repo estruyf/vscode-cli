@@ -1,10 +1,11 @@
 import { writeFileSync } from "fs";
+import { Packager } from "../helpers/Packager";
 
 export interface Command {
   command: string;
   title: string;
-  category: string;
-  icon: {
+  category?: string;
+  icon?: {
     light: string;
     dark: string;
   }
@@ -13,10 +14,9 @@ export interface Command {
 export class Commands {
   
   public static export(heading: number = 2) {
-    const cwd = process.cwd();
-    const pkg = require(`${cwd}/package.json`);
+    const pkg = Packager.fetch();
     
-    if (!this.validatePkg(pkg)) {
+    if (!Packager.validate(pkg)) {
       return;
     }
 
@@ -34,10 +34,9 @@ ID: \`${command.command}\`
   }
 
   public static order() {
-    const cwd = process.cwd();
-    const pkg = require(`${cwd}/package.json`);
+    const pkg = Packager.fetch();
     
-    if (!this.validatePkg(pkg)) {
+    if (!Packager.validate(pkg)) {
       return;
     }
 
@@ -45,15 +44,31 @@ ID: \`${command.command}\`
     const commandsNames = commands.sort(this.sorting);
     
     pkg.contributes.commands = commandsNames;
-    writeFileSync(`${cwd}/package.json`, JSON.stringify(pkg, null, 2));
+    writeFileSync(Packager.location(), JSON.stringify(pkg, null, 2));
   }
 
-  private static validatePkg(pkg: any) {
-    if (!pkg || !pkg.contributes) {
-      console.error('package.json is not found or it does not contain "contributes" section');
-      return false;
+  public static add(name: string, title?: string | null, category?: string | null) {
+    const pkg = Packager.fetch();
+
+    if (!Packager.validate(pkg)) {
+      return;
     }
-    return true;
+
+    const commands: Command[] = pkg.contributes.commands;
+    const newCommand: Command = {
+      command: name,
+      title: title || 'Hello World!'
+    }
+
+    if (category) {
+      newCommand.category = category;
+    }
+
+    commands.push(newCommand);
+
+    pkg.contributes.commands = commands;
+
+    writeFileSync(Packager.location(), JSON.stringify(pkg, null, 2));
   }
 
   private static sorting(a: Command, b: Command) {
