@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.5] 2022-01-31
+
+- Added `vsc commands add` command
+- Added `vsc settings add` command
+
 ## [0.0.5] 2021-09-22
 
 - Removed logging in `commands sort`
