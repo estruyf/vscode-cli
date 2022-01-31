@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.0.7] 2022-01-31
+## [0.0.8] 2022-01-31
 
 - Fix type parameter to support array or string
 
