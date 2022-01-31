@@ -26,7 +26,7 @@ function parseArguments(options: any) {
 			name: typeof args['--name'] === 'string' ? args['--name'] : null,
 			title: typeof args['--title'] === 'string' ? args['--title'] : null,
 			category: typeof args['--category'] === 'string' ? args['--category'] : null,
-			type: typeof args['--type'] === 'string' ? args['--type'] : "",
+			type: typeof args['--type'] === 'string' ? args['--type'] : null,
 			description: typeof args['--description'] === 'string' ? args['--description'] : null,
 		};
 	} catch (e: any) {

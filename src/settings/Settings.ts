@@ -60,10 +60,19 @@ ${setting.markdownDescription || setting.description || ''}
       throw new Error(`Setting "${name}" already exists`);
     }
 
-    const newSetting = {
-      type: type || 'string',
+    const newSetting: any = {
       markdownDescription: description || ""
     };
+
+    if (type) {
+      if (type.length > 1) {
+        newSetting["type"] = type;
+      } else {
+        newSetting["type"] = type[0];
+      }
+    } else {
+      newSetting["type"] = 'string';
+    }
 
     settings[name] = newSetting;
 
