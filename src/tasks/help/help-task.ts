@@ -24,7 +24,21 @@ ${blue(`settings add`)} - Adds a new setting.
 
 ${bgYellow().black().bold(" OPTIONS ")}	
 
+${gray(`Commands & settings - OPTIONS`)}
+
 ${yellow(`--heading, -h`)} -  Specify a heading level for the output. ${gray(`DEFAULT: 2`)}
+
+${gray(`Commands add - OPTIONS`)}
+
+${yellow(`--name, -n`)} -  Specify the name of the command. REQUIRED
+${yellow(`--title, -t`)} -  Specify the title of the command.
+${yellow(`--category, -c`)} -  Specify the title of the command.
+
+${gray(`Settings add - OPTIONS`)}
+
+${yellow(`--name, -n`)} -  Specify the name of the command. REQUIRED
+${yellow(`--type`)} -  Specify the type of the setting.
+${yellow(`--description`)} -  Specify the description of the setting.
 
 ${bgMagenta().white().bold(" EXAMPLES ")}	
 
