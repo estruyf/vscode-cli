@@ -2,7 +2,7 @@
 
 A VS Code CLI to help you with exporting the contribution points to `Markdown`. The CLI helps you with documenting all `commands` and `settings` of your extension.
 
-![](./assets/help.png)
+![](./assets/help-v1.0.0.png)
 
 ## Installation
 
