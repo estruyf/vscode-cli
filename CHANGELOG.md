@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.0] 2022-02-01
+
+- Restructuring of the codebase
+- First major release
+
 ## [0.0.8] 2022-01-31
 
 - Fix type parameter to support array or string

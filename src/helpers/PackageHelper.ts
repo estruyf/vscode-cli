@@ -1,9 +1,9 @@
 
 
-export class Packager {
+export class PackageHelper {
 
   public static fetch() {
-    return require(Packager.location());
+    return require(PackageHelper.location());
   }
 
   public static location() {
@@ -13,9 +13,9 @@ export class Packager {
 
   public static validate(pkg: any) {
     if (!pkg || !pkg.contributes) {
-      console.error('package.json is not found or it does not contain "contributes" section');
       return false;
     }
+    
     return true;
   }
 }

@@ -10,7 +10,8 @@
 			"DOM"
 		],
 		"rootDir": "src",
-		"strict": true
+		"strict": true,
+		"resolveJsonModule": true
 	},
 	"exclude": [
 		"node_modules",
